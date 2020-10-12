@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - ${CODE_DIR}:/code
+            - ./site.conf:/etc/nginx/conf.d/default.conf
+        networks:
+            - code-network
+    php:
+        build: ./php
+        volumes:
+            - ${CODE_DIR}:/code
+        networks:
+            - code-network
+
+networks:
+    code-network:
+        driver: bridge
