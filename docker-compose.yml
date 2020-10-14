@@ -1,13 +1,17 @@
-version: '2'
+version: '3'
 
 services:
     web:
-        image: nginx:latest
+        image: staticfloat/nginx-certbot
         ports:
-            - "8080:80"
+            - "80:80"
+            - "443:443"
         volumes:
             - ${CODE_DIR}:/code
-            - ./site.conf:/etc/nginx/conf.d/default.conf
+            - ./conf.d:/etc/nginx/user.conf.d:ro
+            - ./certbot_extra_domains:/etc/nginx/certbot/extra_domains:ro
+        environment:
+            CERTBOT_EMAIL: "truculence01@protonmail.ch"
         networks:
             - code-network
     php:
