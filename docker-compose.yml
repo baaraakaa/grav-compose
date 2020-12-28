@@ -11,7 +11,7 @@ services:
             - ./conf.d:/etc/nginx/user.conf.d:ro
             - ./certbot_extra_domains:/etc/nginx/certbot/extra_domains:ro
         environment:
-            CERTBOT_EMAIL: "truculence01@protonmail.ch"
+            CERTBOT_EMAIL: ${CERTBOT_EMAIL}
         networks:
             - code-network
     php:
